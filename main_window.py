@@ -3,6 +3,7 @@ from inspect import signature
 from pygame.time import Clock
 
 from events import Timer
+from events import function_table
 from gfx import SceneMaker
 from gfx import TextManager
 from gfx.scenes_details import SceneMain
@@ -37,16 +38,14 @@ class MainWindow(metaclass=Singleton):
             # print(self.clock.get_fps())
 
     def process_event(self, event):
-        try:
-            from events.event_maps import function_event
-            fun = function_event.get(event.get_id())
-            sig = signature(fun)
-            if str(sig) == '(window)':
-                fun(self)
-            elif str(sig) == '(window, event)':
-                fun(self, event)
-            else:
-                raise NotImplementedError("Some kind of new event?")
-        except TypeError:  # startup and some other pygame events
-            pass
+        fun = function_table.get(event.get_id(), None)
+        if fun is None:
+            return
+        sig = signature(fun)
+        if str(sig) == '(window)':
+            fun(self)
+        elif str(sig) == '(window, event)':
+            fun(self, event)
+        else:
+            raise NotImplementedError("Some kind of new event?")
 

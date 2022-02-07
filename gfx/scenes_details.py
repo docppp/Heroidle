@@ -9,7 +9,7 @@ from utils import COLORS
 SceneMain = SceneDict([
     ('bg', 'bg_grey.png'),
     ('details', [
-        Image(100, 420, 'sorc_red.png', ClickAction.goto_red),
+        Image(x=100, y=420, sprite='sorc_red.png', on_click=ClickAction.goto_red),
         Image(110, 430, 'sorc_red.png', ClickAction.no_action, topness=3, movable=True),
         Image(300, 420, 'sorc_green.png', ClickAction.goto_green, topness=2),
         Image(310, 430, 'sorc_green.png', ClickAction.goto_green),

@@ -7,7 +7,7 @@ custom_event_ids = {
     'timer_event':  Events.user_event(1),
 }
 
-function_event = {
+function_table = {
     Events.QUIT:                            Events.quit,
     Events.MOUSE_PRESS:                     Mouse.event_mouse_press,
     Events.MOUSE_RELEASE:                   Mouse.event_mouse_release,

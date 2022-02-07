@@ -4,7 +4,7 @@ from .scene_maker import SceneMaker
 class ClickAction:
 
     @staticmethod
-    def no_action():
+    def no_action(*args):
         pass
 
     @staticmethod
