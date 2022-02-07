@@ -1,14 +1,13 @@
 from operator import sub
 
-from utils import static_class
 from wrapg.events import Events
 
 
-@static_class
 class Mouse:
     _mouse_pressed = False
     _mouse_press_pos = (0, 0)
 
+    @staticmethod
     def event_mouse_press(window, event):
         print(f'pressed at {event.pos}')
         Mouse._mouse_press_pos = event.pos
@@ -17,6 +16,7 @@ class Mouse:
             if window.focused_detail is not None:
                 window.focused_detail.mouse_hold = True
 
+    @staticmethod
     def event_mouse_release(window, event):
         if event.button == Events.BUTTON_LEFT:
             Mouse.left_click(window, event.pos)
@@ -27,6 +27,7 @@ class Mouse:
         elif event.button == Events.BUTTON_WHEEL_DOWN:
             Mouse.wheel_down(window, event.pos)
 
+    @staticmethod
     def event_mouse_move(window):
         if window.focused_detail is not None:
             focus_check = not (Mouse._mouse_pressed and window.focused_detail.movable)
@@ -39,6 +40,7 @@ class Mouse:
         if move_check:
             Mouse.move_detail(window.focused_detail)
 
+    @staticmethod
     def check_hover(window):
         pos = Events.get_mouse_pos()
         focused = window.active_scene.check_focus(pos[0], pos[1])
@@ -46,6 +48,7 @@ class Mouse:
             print(f'{focused} focused')
         window.focused_detail = focused
 
+    @staticmethod
     def move_detail(detail):
         pos = Events.get_mouse_pos()
         dx, dy = map(sub, pos, Mouse._mouse_press_pos)
@@ -53,6 +56,7 @@ class Mouse:
         detail.y += dy
         Mouse._mouse_press_pos = pos
 
+    @staticmethod
     def left_click(window, pos):
         print(f'released at {pos}')
         Mouse._mouse_pressed = False
@@ -62,8 +66,10 @@ class Mouse:
             detail.mouse_hold = False
             detail.on_click(window)
 
+    @staticmethod
     def wheel_up(window, pos):
         print('u')
 
+    @staticmethod
     def wheel_down(window, pos):
         print('d')

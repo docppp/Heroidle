@@ -1,6 +1,7 @@
+from inspect import signature
+
 from pygame.time import Clock
 
-from events import EventChecker
 from events import Timer
 from gfx import SceneMaker
 from gfx import TextManager
@@ -16,7 +17,6 @@ class MainWindow(metaclass=Singleton):
         self.FPS = 24
         self.clock = Clock()
         self.focused_detail = None
-        self.event_checker = EventChecker(self)
         self.second_timer = Timer(1)
         self.second_timer.run()
         self.active_scene = SceneMaker.create_scene(SceneMain)
@@ -32,8 +32,21 @@ class MainWindow(metaclass=Singleton):
             self.draw()
 
             for event in Events.get_all():
-                self.event_checker.process_event(event)
+                self.process_event(event)
             # sleep(0.025)
             # print(self.clock.get_fps())
 
+    def process_event(self, event):
+        try:
+            from events.event_maps import function_event
+            fun = function_event.get(event.get_id())
+            sig = signature(fun)
+            if str(sig) == '(window)':
+                fun(self)
+            elif str(sig) == '(window, event)':
+                fun(self, event)
+            else:
+                raise NotImplementedError("Some kind of new event?")
+        except TypeError:  # startup and some other pygame events
+            pass
 

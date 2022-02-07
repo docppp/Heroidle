@@ -1,5 +1,4 @@
 from wrapg import Events
-from .event_checker import EventChecker
 from .mouse import Mouse
 from .timer import Timer
 
@@ -9,7 +8,7 @@ custom_event_ids = {
 }
 
 function_event = {
-    Events.QUIT:                            EventChecker.check_quit,
+    Events.QUIT:                            Events.quit,
     Events.MOUSE_PRESS:                     Mouse.event_mouse_press,
     Events.MOUSE_RELEASE:                   Mouse.event_mouse_release,
     Events.MOUSE_MOVE:                      Mouse.event_mouse_move,
