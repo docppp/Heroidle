@@ -10,11 +10,13 @@ def default_send_timer_event_func():
 
 class Timer:
 
-    def __init__(self, interval, function=default_send_timer_event_func):
+    def __init__(self, interval, auto_run=False, function=default_send_timer_event_func):
         self.interval = interval
         self.function = function
         self.stopped = threading.Event()
         self.counter = 0
+        if auto_run:
+            self.run()
 
     def wait_and_call(self):
         while not self.stopped.isSet():

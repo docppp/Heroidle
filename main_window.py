@@ -18,8 +18,7 @@ class MainWindow(metaclass=Singleton):
         self.FPS = 24
         self.clock = Clock()
         self.focused_detail = None
-        self.second_timer = Timer(1)
-        self.second_timer.run()
+        self.second_timer = Timer(1, True)
         self.active_scene = SceneMaker.create_scene(SceneMain)
         self.text_manager = TextManager()
 
