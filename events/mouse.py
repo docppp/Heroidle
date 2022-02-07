@@ -1,5 +1,3 @@
-from operator import sub
-
 from wrapg.events import Events
 
 
@@ -51,7 +49,7 @@ class Mouse:
     @staticmethod
     def move_detail(detail):
         pos = Events.get_mouse_pos()
-        dx, dy = map(sub, pos, Mouse._mouse_press_pos)
+        dx, dy = map(lambda x, y: x - y, pos, Mouse._mouse_press_pos)
         detail.x += dx
         detail.y += dy
         Mouse._mouse_press_pos = pos
