@@ -4,8 +4,8 @@ from wrapg import Events
 
 
 def default_send_timer_event_func():
-    from .event_maps import custom_event_ids
-    Events.send_event_id(custom_event_ids['timer_event'])
+    from .event_maps import custom_events
+    Events.send_event_id(custom_events['timer_event'])
 
 
 class Timer:

@@ -3,7 +3,7 @@ from inspect import signature
 from pygame.time import Clock
 
 from events import Timer
-from events import function_table
+from events import get_event_callback
 from gfx import SceneMaker
 from gfx import TextManager
 from gfx.scenes_details import SceneMain
@@ -38,7 +38,7 @@ class MainWindow(metaclass=Singleton):
             # print(self.clock.get_fps())
 
     def process_event(self, event):
-        fun = function_table.get(event.get_id(), None)
+        fun = get_event_callback(event)
         if fun is None:
             return
         sig = signature(fun)
