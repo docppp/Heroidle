@@ -4,8 +4,8 @@ from pygame.time import Clock
 
 from events import Timer
 from events import get_event_callback
-from gfx import SceneMaker
-from gfx import TextManager
+from gfx.scene_maker import SceneMaker
+from gfx.text_manager import TextManager
 from gfx.scenes_details import SceneMain
 from utils import Singleton
 from wrapg import Events

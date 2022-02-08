@@ -40,8 +40,7 @@ class Mouse:
 
     @staticmethod
     def check_hover(window):
-        pos = Events.get_mouse_pos()
-        focused = window.active_scene.check_focus(pos[0], pos[1])
+        focused = window.active_scene.check_focus(Events.get_mouse_pos())
         if window.focused_detail != focused:
             print(f'{focused} focused')
         window.focused_detail = focused

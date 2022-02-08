@@ -2,10 +2,10 @@ from typing import Any
 
 from dataclassy import dataclass
 
+from detail import Detail
+from text_manager import TextManager
 from utils import RGB
 from wrapg.graphics import Graphics
-from .detail import Detail
-from .text_manager import TextManager
 
 
 @dataclass(slots=True)

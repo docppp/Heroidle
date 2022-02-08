@@ -1,7 +1,7 @@
 from dataclassy import dataclass
 
 from wrapg.graphics import Graphics
-from .detail import Detail
+from gfx.detail import Detail
 
 
 @dataclass(slots=True)
@@ -22,14 +22,14 @@ class Scene:
         self._details = []
         self._overlays = []
 
-    def check_focus(self, mouse_x, mouse_y):
+    def check_focus(self, mouse_pos: tuple[int, int]):
         # reverse order, so those on top is checked first
         for layer in reversed(self._overlays):
-            focused = layer.check_focus(mouse_x, mouse_y)
+            focused = layer.check_focus(mouse_pos)
             if focused is not None:
                 return focused
         if self.active:
-            under_mouse = [det for det in self._details if det.is_focused(mouse_x, mouse_y)]
+            under_mouse = [det for det in self._details if det.is_focused(mouse_pos[0], mouse_pos[1])]
             if under_mouse:
                 return max(under_mouse, key=lambda item: item.topness)
         return None

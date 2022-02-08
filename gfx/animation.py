@@ -1,7 +1,7 @@
 from dataclassy import dataclass
 
+from detail import Detail
 from wrapg.graphics import Graphics
-from .detail import Detail
 
 
 @dataclass(slots=True)
