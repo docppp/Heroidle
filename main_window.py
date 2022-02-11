@@ -2,12 +2,12 @@ from inspect import signature
 
 from pygame.time import Clock
 
-from events import Timer
-from events import get_event_callback
+from events.timer import Timer
+from events.event_maps import get_event_callback
 from gfx.scene_maker import SceneMaker
 from gfx.text_manager import TextManager
-from gfx.scenes_details import SceneMain
-from utils import Singleton
+from scenes_details import SceneMain
+from utils.singleton import Singleton
 from wrapg import Events
 from wrapg import Graphics
 

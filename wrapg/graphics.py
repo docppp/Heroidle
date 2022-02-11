@@ -1,12 +1,12 @@
+import imghdr
+import struct
 from os import listdir
 from os import sep
 from os.path import join
-import imghdr
-import struct
 
 import pygame as pg
 
-from utils import RGB
+from utils.color_constants import RGB
 
 
 class Graphics:
