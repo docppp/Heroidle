@@ -57,8 +57,9 @@ class TestScene(unittest.TestCase):
 
     def test_inactive_layer(self):
         self.scene.active = False
-        for pos in self.mouse_pos.values():
-            self.assertIsNone(self.scene.check_focus(pos))
+        for param in self.test_params:
+            with self.subTest(param):
+                self.assertEqual(self.scene.check_focus(param['pos']), None)
 
     @staticmethod
     def draw_args(det):
