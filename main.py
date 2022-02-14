@@ -2,6 +2,7 @@ import sys
 import os
 import subprocess
 from datetime import datetime
+import settings
 
 
 # TODO:
@@ -39,7 +40,7 @@ def main():
     #                        bufsize=1,
     #                        universal_newlines=True,
     #                        shell=True)
-    MainWindow(900, 600).mainLoop()
+    MainWindow().mainLoop()
 
 
 

@@ -1,5 +1,5 @@
 from gfx.scene import Scene
-from .scene_dict import SceneDict
+from gfx.scene_dict import SceneDict
 
 
 class SceneMaker:

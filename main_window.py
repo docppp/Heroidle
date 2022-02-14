@@ -2,8 +2,9 @@ from inspect import signature
 
 from pygame.time import Clock
 
-from events.timer import Timer
+import settings
 from events.event_maps import get_event_callback
+from events.timer import Timer
 from gfx.scene_maker import SceneMaker
 from gfx.text_manager import TextManager
 from scenes_details import SceneMain
@@ -13,12 +14,12 @@ from wrapg import Graphics
 
 
 class MainWindow(metaclass=Singleton):
-    def __init__(self, win_width, win_height):
-        self.window = Graphics.main_window("dupa cicho", (win_width, win_height))
-        self.FPS = 24
+    def __init__(self):
+        self.window = Graphics.main_window("dupa cicho", settings.WINDOW_SIZE)
+        self.FPS = settings.FPS
         self.clock = Clock()
         self.focused_detail = None
-        self.second_timer = Timer(1, True)
+        self.second_timer = Timer(settings.MAIN_CLOCK, True)
         self.active_scene = SceneMaker.create_scene(SceneMain)
         self.text_manager = TextManager()
 

@@ -1,6 +1,7 @@
 from dataclassy import dataclass
 
-from .detail import Detail
+import settings
+from gfx.detail import Detail
 from wrapg.graphics import Graphics
 
 
@@ -15,7 +16,7 @@ class Animation(Detail):
         self._width, self._height = size
 
     def get_surface(self):
-        self.current_frame = (self.current_frame + 1) % 24
+        self.current_frame = (self.current_frame + 1) % settings.FPS
         return self._images[self.current_frame]
 
 

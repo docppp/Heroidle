@@ -1,4 +1,4 @@
-from .scene_maker import SceneMaker
+from gfx.scene_maker import SceneMaker
 
 
 class ClickAction:
