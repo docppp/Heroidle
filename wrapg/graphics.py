@@ -6,11 +6,11 @@ from os.path import join
 
 import pygame as pg
 
+import settings
 from utils.color_constants import RGB
 
 
 class Graphics:
-    _master_path = 'assets'
 
     class Surface:
         __slots__ = '_pg_surface'
@@ -29,13 +29,13 @@ class Graphics:
 
     @staticmethod
     def load_image(file_name: str) -> tuple[Surface, tuple[int, int]]:
-        path = join(Graphics._master_path, file_name)
+        path = join(settings.ASSETS_PATH, file_name)
         size = Graphics._get_png_image_size(path)
         return Graphics.Surface(pg.image.load(path)), size
 
     @staticmethod
     def load_images(dir_name: str) -> tuple[list[Surface], tuple[int, int]]:
-        path = join(Graphics._master_path, dir_name)
+        path = join(settings.ASSETS_PATH, dir_name)
         images = []
         for file_name in listdir(path):
             try:

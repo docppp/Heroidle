@@ -1,4 +1,5 @@
 
+ASSETS_PATH = "assets"
 FPS = 24
 MAIN_CLOCK = 1
 WINDOW_SIZE = 900, 600
