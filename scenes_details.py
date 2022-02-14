@@ -37,7 +37,7 @@ SceneGreen = {
     'bg': 'bg_green.png',
     'details': [
         Image(820, 520, 'back_arrow.png', ClickAction.goto_main),
-        Label(500, 20, COLORS.BLACK, font_type="monospace", font_size=15, text=TextFormatter.seconds_since_startup)
+        Label(500, 20, COLORS.BLACK, font_type="monospace", font_size=15, dynamic_txt=TextFormatter.seconds_since_startup)
     ],
 }
 
