@@ -1,7 +1,7 @@
 from dataclassy import dataclass
 
-from wrapg.graphics import Graphics
 from gfx.detail import Detail
+from wrapg.graphics import Graphics
 
 
 @dataclass(slots=True)
@@ -44,4 +44,3 @@ class Scene:
         # put on the surface in order of the appearance
         for layer in self._overlays:
             layer.draw_all(window)
-

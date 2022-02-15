@@ -1,9 +1,9 @@
 from gfx.animation import Animation
 from gfx.click_action import ClickAction
+from gfx.click_action import TextFormatter
 from gfx.image import Image
 from gfx.label import Label
 from gfx.scene_dict import SceneDict
-from gfx.click_action import TextFormatter
 from utils import COLORS
 
 SceneMain = SceneDict([

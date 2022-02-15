@@ -48,4 +48,3 @@ class MainWindow(metaclass=Singleton):
             fun(self, event)
         else:
             raise NotImplementedError("Some kind of new event?")
-

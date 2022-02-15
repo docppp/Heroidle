@@ -1,10 +1,3 @@
-import sys
-import os
-import subprocess
-from datetime import datetime
-import settings
-
-
 # TODO:
 #  - custom eventy          https://stackoverflow.com/questions/23571956/pygame-way-to-create-more-userevent-type-events
 #  - pygame adapter?

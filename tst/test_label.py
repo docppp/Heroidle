@@ -1,5 +1,5 @@
 import unittest
-from unittest.mock import Mock, call
+from unittest.mock import Mock
 
 from gfx.label import Label
 from gfx.text_manager import TextManager

@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Optional
 
 from dataclassy import dataclass
 
@@ -13,7 +13,7 @@ class Label(Detail):
     color: RGB
     font_type: str
     font_size: int
-    static_txt: 'Any' = None
+    static_txt: Optional[str] = None
     dynamic_txt: 'Any' = None
     _render: Graphics.Surface = None
 
