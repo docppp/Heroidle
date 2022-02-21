@@ -1,17 +1,14 @@
-from dataclassy import dataclass
-
 from gfx.detail import Detail
 from wrapg.graphics import Graphics
 
 
-@dataclass(slots=True)
 class Image(Detail):
-    sprite: str
-    _image: Graphics.Surface = None
+    __slots__ = 'sprite', '_image'
 
-    def __post_init__(self):
-        self._image, size = Graphics.load_image(self.sprite)
-        self._width, self._height = size
+    def __init__(self, x, y, sprite, **kwargs):
+        self.sprite = sprite
+        self._image, (width, height) = Graphics.load_image(sprite)
+        super().__init__(x, y, width, height, **kwargs)
 
     def get_surface(self):
         return self._image

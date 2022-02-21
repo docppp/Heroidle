@@ -6,7 +6,7 @@ from gfx.detail import Detail
 class TestDetail(unittest.TestCase):
 
     def setUp(self):
-        self.detail = Detail(x=100, y=50, _width=10, _height=10)
+        self.detail = Detail(x=100, y=50, width=10, height=10)
 
         self.test_params = [
             {'name': 'top-left', 'pos': (99, 49), 'focus': False},
@@ -22,15 +22,23 @@ class TestDetail(unittest.TestCase):
             {'name': 'down-right', 'pos': (111, 61), 'focus': False},
         ]
 
+    def test_rectangle(self):
+        self.assertEqual(self.detail.rect._pg_rect.y, self.detail.y)
+        self.assertEqual(self.detail.rect._pg_rect.x, self.detail.x)
+        self.assertEqual(self.detail.rect._pg_rect.width, self.detail.width)
+        self.assertEqual(self.detail.rect._pg_rect.height, self.detail.height)
+
     def test_change_position(self):
         self.detail.change_pos_by((1, -1))
         self.assertEqual(self.detail.x, 101)
         self.assertEqual(self.detail.y, 49)
+        self.test_rectangle()
 
     def test_set_position(self):
         self.detail.set_pos((1, 1))
         self.assertEqual(self.detail.x, 1)
         self.assertEqual(self.detail.y, 1)
+        self.test_rectangle()
 
     def test_focus(self):
         for param in self.test_params:

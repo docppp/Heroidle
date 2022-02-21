@@ -1,19 +1,16 @@
-from dataclassy import dataclass
-
 import settings
 from gfx.detail import Detail
 from wrapg.graphics import Graphics
 
 
-@dataclass(slots=True)
 class Animation(Detail):
-    sprites_dir: str
-    current_frame: int = 0
-    _images: list[Graphics.Surface] = None
+    __slots__ = 'sprites_dir', '_images', 'current_frame'
 
-    def __post_init__(self):
-        self._images, size = Graphics.load_images(self.sprites_dir)
-        self._width, self._height = size
+    def __init__(self, x, y, sprites_dir, **kwargs):
+        self.sprites_dir = sprites_dir
+        self._images, (width, height) = Graphics.load_images(self.sprites_dir)
+        self.current_frame = 0
+        super().__init__(x, y, width, height, **kwargs)
 
     def get_surface(self):
         self.current_frame = (self.current_frame + 1) % settings.FPS

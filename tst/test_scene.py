@@ -21,9 +21,9 @@ class TestScene(unittest.TestCase):
         Detail.get_surface = lambda this: id(this)
 
         self.details = {
-            'D1': Detail(x=100, y=50, _width=20, _height=10, topness=2),
-            'D2': Detail(x=130, y=50, _width=20, _height=10, topness=1),
-            'D3': Detail(x=110, y=55, _width=30, _height=10, topness=3),
+            'D1': Detail(x=100, y=50, width=20, height=10, topness=2),
+            'D2': Detail(x=130, y=50, width=20, height=10, topness=1),
+            'D3': Detail(x=110, y=55, width=30, height=10, topness=3),
         }
         self.scene = Scene("")
         self.scene._details = list(self.details.values())

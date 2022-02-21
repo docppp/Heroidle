@@ -21,11 +21,21 @@ class Graphics:
         def get_size(self):
             return self._pg_surface.get_size()
 
+    class Rect:
+        __slots__ = '_pg_rect'
+
+        def __init__(self, rect: pg.Rect):
+            self._pg_rect = rect
+
     class Font:
         __slots__ = '_pg_font'
 
         def __init__(self, font: pg.font.Font):
             self._pg_font = font
+
+    @staticmethod
+    def create_rect(x, y, width, height):
+        return Graphics.Rect(pg.Rect(x, y, width, height))
 
     @staticmethod
     def load_image(file_name: str) -> tuple[Surface, tuple[int, int]]:

@@ -1,39 +1,33 @@
-from typing import Any, Optional
-
-from dataclassy import dataclass
-
 from gfx.detail import Detail
 from gfx.text_manager import TextManager
-from utils import RGB
-from wrapg.graphics import Graphics
 
 
-@dataclass(slots=True)
 class Label(Detail):
-    color: RGB
-    font_type: str
-    font_size: int
-    static_txt: Optional[str] = None
-    dynamic_txt: 'Any' = None
-    _render: Graphics.Surface = None
+    __slots__ = 'color', 'font_type', 'font_size', 'static_txt', 'dynamic_txt', '_render'
 
-    def __post_init__(self):
-        if self.static_txt is None and self.dynamic_txt is None:
+    def __init__(self, x, y, color, font_type, font_size,  **kwargs):
+        if 'static_txt' in kwargs and 'dynamic_txt' in kwargs:
             raise AttributeError("Cannot create label without static nor dynamic txt")
-        if self.static_txt is not None and self.dynamic_txt is not None:
+        if 'static_txt' not in kwargs and 'dynamic_txt' not in kwargs:
             raise AttributeError("Cannot create label with both static and dynamic txt")
-
-        if self.static_txt is not None:
-            self._render, size = TextManager().get_render(self.static_txt, self.color, self.font_type, self.font_size)
-            self._width, self._height = size
-        else:
-            self._render, size = TextManager().get_default_render()
-            self._width, self._height = size
+        self.color = color
+        self.font_type = font_type
+        self.font_size = font_size
+        if 'static_txt' in kwargs:
+            self.static_txt = kwargs['static_txt']
+            self.dynamic_txt = None
+            self._render, (width, height) = TextManager().get_render(self.static_txt, self.color, self.font_type, self.font_size)
+            kwargs.pop('static_txt')
+        if 'dynamic_txt' in kwargs:
+            self.static_txt = None
+            self.dynamic_txt = kwargs['dynamic_txt']
+            self._render, (width, height) = TextManager().get_default_render()
+            kwargs.pop('dynamic_txt')
+        super().__init__(x, y, width, height, **kwargs)
 
     def get_surface(self):
         if self.static_txt is not None:
             return self._render
         else:
-            self._render, size = TextManager().get_render(self.dynamic_txt(), self.color, self.font_type, self.font_size)
-            self._width, self._height = size
+            self._render, (self.width, self.height) = TextManager().get_render(self.dynamic_txt(), self.color, self.font_type, self.font_size)
             return self._render
