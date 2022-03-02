@@ -24,16 +24,18 @@
 
 
 def main():
-    import pygame as pg
+    import pygame as pg  # cannot get rid of it due to init below
     pg.init()
-    from main_window import MainWindow
+    from pyclick.game_window import GameWindow
     # cpp = subprocess.Popen(["MouseGetter.exe"],
     #                        stdin=subprocess.PIPE,
     #                        stdout=subprocess.PIPE,
     #                        bufsize=1,
     #                        universal_newlines=True,
     #                        shell=True)
-    MainWindow().mainLoop()
+    w = GameWindow()
+    while True:
+        w.mainLoop()
 
 
 
