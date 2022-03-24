@@ -44,7 +44,7 @@ class Events:
         return pg.mouse.get_pos()
 
     @staticmethod
-    def quit(window):
+    def quit():
         pg.display.quit()
         pg.quit()
         exit()

@@ -1,3 +1,4 @@
+from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from pyclick.gfx.abstract_scene import AbstractScene
