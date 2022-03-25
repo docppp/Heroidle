@@ -1,12 +1,9 @@
-from inspect import signature
-
 from pygame.time import Clock
 
 from pyclick.utils import Singleton, get_types_of_function_args
 from pyclick.wrapg import Events
 from pyclick.wrapg import Graphics
-from .events.event_maps import get_event_callback
-from .gfx.text_manager import TextManager
+from .controls.mouse import Mouse
 
 
 class GameWindow(metaclass=Singleton):
@@ -16,7 +13,6 @@ class GameWindow(metaclass=Singleton):
         self.clock = Clock()
         self.focused_detail = None
         self.active_scene = None
-        self.text_manager = TextManager()
 
     def mainLoop(self):
         self.clock.tick(self.FPS)
@@ -30,7 +26,7 @@ class GameWindow(metaclass=Singleton):
         Graphics.update_display()
 
     def process_event(self, event):
-        fun = get_event_callback(event)
+        fun = self._get_event_callback(event)
         if fun is None:
             return
 
@@ -49,3 +45,13 @@ class GameWindow(metaclass=Singleton):
 
         fun(*args)
 
+    __callback_table = {
+        Events.QUIT: Events.quit,
+        Events.MOUSE_PRESS: Mouse.event_mouse_press,
+        Events.MOUSE_RELEASE: Mouse.event_mouse_release,
+        Events.MOUSE_MOVE: Mouse.event_mouse_move,
+    }
+
+    @staticmethod
+    def _get_event_callback(event: Events.DefaultEvent):
+        return GameWindow.__callback_table.get(event.get_id(), None)

@@ -11,6 +11,7 @@ if TYPE_CHECKING:
 class Mouse:
     _mouse_pressed = False
     _mouse_press_pos = (0, 0)
+    _detail_held = None
 
     @staticmethod
     def event_mouse_press(window: GameWindow, event: Events.MouseEvent):
@@ -18,8 +19,7 @@ class Mouse:
         Mouse._mouse_press_pos = event.pos
         Mouse._mouse_pressed = True
         if event.button == Events.BUTTON_LEFT:
-            if window.focused_detail is not None:
-                window.focused_detail.mouse_hold = True
+            Mouse._detail_held = window.focused_detail
 
     @staticmethod
     def event_mouse_release(window: GameWindow, event: Events.MouseEvent):
@@ -35,12 +35,10 @@ class Mouse:
 
     @staticmethod
     def event_mouse_move(window: GameWindow):
-        if window.focused_detail is not None:
-            focus_check = not (Mouse._mouse_pressed and window.focused_detail.movable)
-            move_check = window.focused_detail.movable and window.focused_detail.mouse_hold
-        else:
-            focus_check = True
-            move_check = False
+        fcs = window.focused_detail
+        focus_check = (not (fcs.movable and Mouse._mouse_pressed)) if fcs else True
+        move_check = (fcs.movable and Mouse._detail_held == fcs) if fcs else False
+
         if focus_check:
             Mouse.check_hover(window)
         if move_check:
@@ -65,9 +63,9 @@ class Mouse:
         print(f'released at {pos}')
         Mouse._mouse_pressed = False
         detail = window.focused_detail
-        if detail is not None and detail.mouse_hold:
+        if detail is not None and Mouse._detail_held == detail:
             print(detail)
-            detail.mouse_hold = False
+            Mouse._detail_held = None
             detail.on_click(window)
 
     @staticmethod

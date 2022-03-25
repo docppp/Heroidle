@@ -16,7 +16,6 @@ class Detail:
         self.topness = topness
         self.active = active
         self.movable = movable
-        self.mouse_hold = False
         self.on_click = on_click
 
     def change_pos_by(self, delta_pos: tuple[int, int]):
