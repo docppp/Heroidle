@@ -70,10 +70,12 @@ class Mouse:
 
     @staticmethod
     def wheel_up(window: GameWindow, pos: tuple[int, int]):
-        window.active_scene.scroll_by(pos, -10)
+        if window.active_scene:
+            window.active_scene.scroll_by(pos, -10)
         print('u')
 
     @staticmethod
     def wheel_down(window: GameWindow, pos: tuple[int, int]):
-        window.active_scene.scroll_by(pos, 10)
+        if window.active_scene:
+            window.active_scene.scroll_by(pos, 10)
         print('d')
