@@ -22,7 +22,8 @@ class GameWindow(metaclass=Singleton):
             self.process_event(event)
 
     def draw(self):
-        self.active_scene.draw_all(self.window)
+        if self.active_scene:
+            self.active_scene.draw_all(self.window)
         Graphics.update_display()
 
     def process_event(self, event):
