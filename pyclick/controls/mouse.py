@@ -39,7 +39,7 @@ class Mouse:
         focus_check = (not (fcs.movable and Mouse._mouse_pressed)) if fcs else True
         move_check = (fcs.movable and Mouse._detail_held == fcs) if fcs else False
 
-        if focus_check:
+        if focus_check and window.active_scene:
             Mouse.check_hover(window)
         if move_check:
             Mouse.move_detail(window)
