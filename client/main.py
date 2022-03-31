@@ -47,7 +47,7 @@ class Client:
         print("Connecting to Server on port 5050")
         context = zmq.Context()
         self.socket = context.socket(zmq.REQ)
-        self.socket.connect("tcp://localhost:5050")
+        self.socket.connect("tcp://127.0.0.1:5050")
 
     def req_create_player(self, username, password):
         message = f"msgId:0x01;desc:player_create;args:'{username}','{password}'"
