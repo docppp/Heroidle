@@ -75,45 +75,51 @@ public:
     nlohmann::json toJson() const
     {
         return {
-                {"user",      username},
-                {"character", {
-                                      {"lvl",      character.lvl},
-                                      {"exp",      character.exp},
-                                      {"honor",     character.honor}
-                              }
-                },
-                {"kingdom",   {
-                                      {"cityhall", kingdom.cityhall},
-                                      {"goldmine", kingdom.goldmine},
-                                      {"stonemine", kingdom.stonemine},
-                                      {"sawmill", kingdom.sawmill},
-                                      {"trainingroom", kingdom.trainingroom}
-                              }
-                },
-                {"warehouse", {
-                                      {"gold",     {
-                                                           {"amount", warehouse.gold.amount},
-                                                           {"onhand", warehouse.gold.on_hand},
-                                                           {"onhandmax", warehouse.gold.on_hand_max},
-                                                           {"income", 10}
-                                                   }
-                                      },
-                                      {"stone",    {
-                                                           {"amount", warehouse.stone.amount},
-                                                           {"onhand", warehouse.stone.on_hand},
-                                                           {"onhandmax", warehouse.stone.on_hand_max},
-                                                           {"income", 10}
-                                                   }
-                                      },
-                                      {"wood",     {
-                                                            {"amount", warehouse.wood.amount},
-                                                            {"onhand", warehouse.wood.on_hand},
-                                                            {"onhandmax", warehouse.wood.on_hand_max},
-                                                            {"income", 10}
-                                                   }
-                                      }
-                              }
-                }
+                {"user",    username},
+                {"character",
+                    {
+                        {"lvl",     character.lvl},
+                        {"exp",     character.exp},
+                        {"honor",   character.honor}
+                    }
+                }, // character
+                {"kingdom",
+                    {
+                        {"cityhall",        kingdom.cityhall},
+                        {"goldmine",        kingdom.goldmine},
+                        {"stonemine",       kingdom.stonemine},
+                        {"sawmill",         kingdom.sawmill},
+                        {"trainingroom",    kingdom.trainingroom}
+                    }
+                }, // kingdom
+                {"warehouse",
+                    {
+                        {"gold",
+                            {
+                                {"amount",      warehouse.gold.amount},
+                                {"onhand",      warehouse.gold.on_hand},
+                                {"onhandmax",   warehouse.gold.on_hand_max},
+                                {"income",      10}
+                            }
+                        },
+                        {"stone",
+                            {
+                                {"amount",      warehouse.stone.amount},
+                                {"onhand",      warehouse.stone.on_hand},
+                                {"onhandmax",   warehouse.stone.on_hand_max},
+                                {"income",      10}
+                            }
+                        },
+                        {"wood",
+                            {
+                                {"amount",      warehouse.wood.amount},
+                                {"onhand",      warehouse.wood.on_hand},
+                                {"onhandmax",   warehouse.wood.on_hand_max},
+                                {"income",      10}
+                            }
+                        }
+                    }
+                } // warehouse
         };
     }
 

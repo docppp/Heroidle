@@ -5,6 +5,8 @@ import zmq
 
 import threading
 
+from cbor import cbor
+
 
 class Timer:
 
@@ -36,11 +38,11 @@ class Client:
         self.socket: zmq.Socket = None
         self.connect_to_server()
 
-    def send_message(self, message: str):
+    def send_message(self, message: str) -> dict:
         print(f"Sending {getsizeof(message)} bytes: {message}")
         msg = message.encode()
         self.socket.send(msg)
-        ans = bytes(self.socket.recv()).decode()
+        ans = cbor.loads(self.socket.recv())
         return ans
 
     def connect_to_server(self):
