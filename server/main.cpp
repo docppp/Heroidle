@@ -26,8 +26,11 @@
 #include <boost/asio.hpp>
 #include <boost/thread/thread.hpp>
 #include <boost/bind/bind.hpp>
+#include <nlohmann/json.hpp>
 #include "timer.hpp"
+#include "resource.hpp"
 
+using json = nlohmann::json;
 int main()
 {
     Timer t = Timer();
@@ -44,9 +47,19 @@ int main()
     zmq::message_t msg;
 
     auto res = sock.recv(msg);
-    std::cout << msg.to_string() << "\n";
-
-    sock.send(zmq::str_buffer("response"));
+    auto msg_str = msg.to_string();
+    std::cout << msg_str << "\n";
+    if (msg_str.rfind("msgId:0x01", 0) == 0)
+    {
+        Player p("user1");
+        json j = p.toJson();
+        zmq::message_t bytes(json::to_cbor(j));
+        sock.send(bytes);
+    }
+    else
+    {
+        sock.send(zmq::str_buffer("response"));
+    }
 
 //    std::cout << "Got " << *ret
 //              << " messages" << std::endl;

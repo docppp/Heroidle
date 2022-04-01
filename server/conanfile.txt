@@ -1,6 +1,7 @@
 [requires]
 zeromq/4.3.2
 cppzmq/4.8.1
+jsonformoderncpp/3.7.0
 
 [generators]
 cmake
