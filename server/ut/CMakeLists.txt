@@ -7,6 +7,7 @@ set(SOURCES ${TEST_SOURCES})
 
 add_executable(${BINARY} ${TEST_SOURCES})
 
-add_test(NAME ${BINARY} COMMAND ${BINARY})
-
+target_include_directories(${BINARY} PRIVATE ${SOURCE_DIR}/src)
 target_link_libraries(${BINARY} PUBLIC ${CMAKE_PROJECT_NAME}_lib ${CONAN_LIBS})
+
+add_test(NAME ${BINARY} COMMAND ${BINARY})

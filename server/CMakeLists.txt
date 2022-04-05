@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 include(conan.cmake)
 
+include_directories(src)
 add_subdirectory(src)
 
 option(RUN_TESTS "Build the tests" ON)

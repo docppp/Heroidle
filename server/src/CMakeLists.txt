@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.21)
 set(BINARY ${CMAKE_PROJECT_NAME})
+set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_compile_options(-fconcepts)
 

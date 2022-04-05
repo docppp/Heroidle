@@ -13,11 +13,14 @@ public:
 
     void loadPlayers();
     void saveOnlinePlayersToDB();
-    std::optional<json_t> getPlayerInfo(const std::string& username) const;
+    std::optional<json_t> getOnlinePlayerInfo(const std::string& username) const;
     void updateOnlinePlayers();
     void forcePlayerSave(const std::string& username);
     bool createPlayer(const std::string& username);
     void loginPlayer(const std::string& username);
+    void logoutPlayer(const std::string& username);
+    std::vector<std::string> getOnlinePlayersUsername() const;
+    std::vector<std::string> getOfflinePlayersUsername() const;
 
 private:
     std::vector<Player> onlinePlayers;

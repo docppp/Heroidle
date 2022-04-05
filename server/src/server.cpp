@@ -1,6 +1,6 @@
 #include "server.hpp"
 
-std::optional<json_t> Server::getPlayerInfo(const std::string &username) const
+std::optional<json_t> Server::getOnlinePlayerInfo(const std::string &username) const
 {
     for (const Player& p : onlinePlayers)
     {
@@ -36,6 +36,34 @@ void Server::loginPlayer(const std::string &username)
         {
             onlinePlayers.push_back(std::move(*it));
             offlinePlayers.erase(it);
+            return;
         }
     }
+}
+
+void Server::logoutPlayer(const std::string &username)
+{
+    for (auto it = onlinePlayers.begin(); it != onlinePlayers.end(); ++it)
+    {
+        if (it->getUsername() == username)
+        {
+            offlinePlayers.push_back(std::move(*it));
+            onlinePlayers.erase(it);
+            return;
+        }
+    }
+}
+
+std::vector<std::string> Server::getOnlinePlayersUsername() const
+{
+    std::vector<std::string> result;
+    for (const Player& p : onlinePlayers) { result.push_back(p.getUsername()); }
+    return result;
+}
+
+std::vector<std::string> Server::getOfflinePlayersUsername() const
+{
+    std::vector<std::string> result;
+    for (const Player& p : offlinePlayers) { result.push_back(p.getUsername()); }
+    return result;
 }
