@@ -8,7 +8,7 @@
 #include <array>
 #include <nlohmann/json.hpp>
 
-using json = nlohmann::json;
+using json_t = nlohmann::json;
 
 struct Resource
 {
@@ -51,6 +51,12 @@ class Player
 public:
     explicit Player(std::string username) : username(std::move(username)) {}
 
+    Player(const Player&) = delete;
+    Player& operator=(const Player&) = delete;
+
+    Player(Player&&) = default;
+    Player& operator=(Player&&) = default;
+
     void update()
     {
         warehouse.gold.on_hand += kingdom.goldmine*10;
@@ -72,7 +78,9 @@ public:
         }
     }
 
-    nlohmann::json toJson() const
+    const std::string getUsername() const { return username; }
+
+    json_t toJson() const
     {
         return {
                 {"user",    username},

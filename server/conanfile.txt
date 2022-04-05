@@ -2,7 +2,8 @@
 zeromq/4.3.2
 cppzmq/4.8.1
 jsonformoderncpp/3.7.0
+gtest/cci.20210126
 
 [generators]
-cmake
+cmake_find_package
 

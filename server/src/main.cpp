@@ -52,8 +52,7 @@ int main()
     if (msg_str.rfind("msgId:0x01", 0) == 0)
     {
         Player p("user1");
-        json j = p.toJson();
-        zmq::message_t bytes(json::to_cbor(j));
+        zmq::message_t bytes{json::to_cbor(p.toJson())};
         sock.send(bytes);
     }
     else
