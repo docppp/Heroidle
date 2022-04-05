@@ -36,7 +36,19 @@ struct Kingdom
     uint goldmine{1};
     uint stonemine{1};
     uint sawmill{1};
-    uint trainingroom{1};
+    uint trainingroom{0};
+
+    json_t toJson() const
+    {
+        return
+        {
+            {"cityhall",        cityhall},
+            {"goldmine",        goldmine},
+            {"stonemine",       stonemine},
+            {"sawmill",         sawmill},
+            {"trainingroom",    trainingroom}
+        };
+    }
 };
 
 struct Character
@@ -44,6 +56,16 @@ struct Character
     uint lvl{1};
     uint exp{0};
     uint honor{0};
+
+    json_t toJson() const
+    {
+        return
+        {
+            {"lvl",     lvl},
+            {"exp",     exp},
+            {"honor",   honor}
+        };
+    }
 };
 
 class Player
@@ -83,23 +105,9 @@ public:
     json_t toJson() const
     {
         return {
-                {"user",    username},
-                {"character",
-                    {
-                        {"lvl",     character.lvl},
-                        {"exp",     character.exp},
-                        {"honor",   character.honor}
-                    }
-                }, // character
-                {"kingdom",
-                    {
-                        {"cityhall",        kingdom.cityhall},
-                        {"goldmine",        kingdom.goldmine},
-                        {"stonemine",       kingdom.stonemine},
-                        {"sawmill",         kingdom.sawmill},
-                        {"trainingroom",    kingdom.trainingroom}
-                    }
-                }, // kingdom
+                {"user",        username},
+                {"character",   character.toJson()},
+                {"kingdom",     kingdom.toJson()},
                 {"warehouse",
                     {
                         {"gold",
