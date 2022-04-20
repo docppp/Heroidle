@@ -9,10 +9,14 @@ conan_basic_setup()
 
 set(SOURCES
         main.cpp
-        resource.hpp
-        timer.hpp
+
+        calculator.hpp
+        kingdom.hpp
+        player.hpp
         server.cpp
-        server.hpp)
+        server.hpp
+        timer.hpp
+        warehouse.hpp)
 
 add_executable(${BINARY} ${SOURCES})
 

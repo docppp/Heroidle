@@ -22,17 +22,20 @@
 //}
 
 #include <iostream>
+#include <type_traits>
 #include <zmq.hpp>
 #include <boost/asio.hpp>
 #include <boost/thread/thread.hpp>
 #include <boost/bind/bind.hpp>
 #include <nlohmann/json.hpp>
 #include "timer.hpp"
-#include "resource.hpp"
+#include "player.hpp"
+#include "server.hpp"
 
 using json = nlohmann::json;
 int main()
 {
+    Server server{};
     Timer t = Timer();
     t.setInterval([&]() {
         std::cout << "Hey.. After each 1s..." << std::endl;
@@ -53,7 +56,7 @@ int main()
     {
         Player p("user1");
         zmq::message_t bytes{json::to_cbor(p.toJson())};
-        sock.send(bytes);
+        sock.send(bytes, zmq::send_flags::none);
     }
     else
     {

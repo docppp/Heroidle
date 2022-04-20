@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <nlohmann/json.hpp>
-#include "resource.hpp"
+#include "player.hpp"
 
 extern const json_t newPlayerJson;
 
@@ -26,7 +26,8 @@ const json_t newPlayerJson = {
                                 {"goldmine",        1},
                                 {"stonemine",       1},
                                 {"sawmill",         1},
-                                {"trainingroom",    0}
+                                {"trainingroom",    0},
+                                {"warehouse",       1}
                         }
             }, // kingdom
             {"warehouse",
@@ -34,28 +35,33 @@ const json_t newPlayerJson = {
                                 {"gold",
                                         {
                                                     {"amount",      1000},
-                                                    {"onhand",      0},
-                                                    {"onhandmax",   100},
-                                                    {"income",      10}
-                                            }
+                                                    {"on_hand",     0},
+                                                    {"on_hand_max", 100}
+                                        }
                                 },
                                 {"stone",
                                         {
                                                     {"amount",      1000},
-                                                    {"onhand",      0},
-                                                    {"onhandmax",   100},
-                                                    {"income",      10}
-                                            }
+                                                    {"on_hand",     0},
+                                                    {"on_hand_max", 100}
+                                        }
                                 },
                                 {"wood",
                                         {
                                                     {"amount",      1000},
-                                                    {"onhand",      0},
-                                                    {"onhandmax",   100},
-                                                    {"income",      10}
-                                            }
+                                                    {"on_hand",     0},
+                                                    {"on_hand_max", 100}
+                                        }
                                 }
                         }
-            } // warehouse
+            }, // warehouse
+            {"income",
+                        {
+                                {"gold_income", 10},
+                                {"stone_income", 10},
+                                {"wood_income", 10}
+                        }
+
+            } // income
 };
 
