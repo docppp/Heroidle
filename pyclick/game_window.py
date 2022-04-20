@@ -24,6 +24,8 @@ class GameWindow(metaclass=Singleton):
     def draw(self):
         if self.active_scene:
             self.active_scene.draw_all(self.window)
+        else:
+            self.window._pg_surface.fill((255, 255, 255))
         Graphics.update_display()
 
     def process_event(self, event):

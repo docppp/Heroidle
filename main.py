@@ -2,48 +2,36 @@
 #  - custom eventy          https://stackoverflow.com/questions/23571956/pygame-way-to-create-more-userevent-type-events
 #  - pygame adapter?
 #  - logging
+import settings
+from client import Client
+from game import GameWindow
 
-# def check_quit(event):
-#     if event.type == pygame.QUIT:
-#         pygame.quit()
-#         return False
-#     return True
-#
-#
-# def check_mouse(event):
-#     if event.type == pygame.MOUSEBUTTONUP:
-#         pos = pygame.mouse.get_pos()
-#         print(pos)
-#        cpp.stdin.write(f"mouse_event{pos[0]}:{pos[1]}\n")
-# def draw(window):
-#     window.fill((0, 0, 0))
-#     pygame.draw.rect(window, (255, 0, 0), main_rects['red'])
-#     pygame.draw.rect(window, (0, 255, 0), main_rects['green'])
-#     pygame.draw.rect(window, (0, 0, 255), main_rects['blue'])
-#     pygame.display.update()
+import pygame as pg  # cannot get rid of it due to init below
+
+from pyclick.controls.timer import Timer
+
+pg.init()
+update_req = False
 
 
 def main():
-    import pygame as pg  # cannot get rid of it due to init below
-    pg.init()
-    from pyclick.game_window import GameWindow
-    # cpp = subprocess.Popen(["MouseGetter.exe"],
-    #                        stdin=subprocess.PIPE,
-    #                        stdout=subprocess.PIPE,
-    #                        bufsize=1,
-    #                        universal_newlines=True,
-    #                        shell=True)
-    w = GameWindow()
+    global update_req
+    game = GameWindow()
+    client = Client()
+    client.connect_to_server()
+    client.req_create_player("user123", "pass123")
+
+    def get_update():
+        global update_req
+        update_req = True
+
+    second_timer = Timer(settings.MAIN_CLOCK, auto_run=True, function=get_update)
     while True:
-        w.mainLoop()
-
-
-
-
-
-
+        game.mainLoop()
+        if update_req:
+            ans = client.req_player_update()
+            update_req = False
 
 
 if __name__ == '__main__':
     main()
-

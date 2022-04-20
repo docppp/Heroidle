@@ -154,3 +154,4 @@ cython_debug/
 *.pyc
 
 sandbox.py
+*/cmake-build-debug/

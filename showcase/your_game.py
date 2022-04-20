@@ -1,9 +1,18 @@
 import settings
+import os
+import sys
+import inspect
+
+currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parentdir = os.path.dirname(currentdir)
+sys.path.insert(0, parentdir)
 
 from pyclick import GameWindow
-from pyclick.events.timer import Timer
+from pyclick.controls.timer import Timer
 from pyclick import SceneMaker
 from scenes import s
+
+
 
 
 class YourGame(GameWindow):
